@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+<h1>{{ visual.headline }}</h1>
+
+<div id="story-meta">
+    <p class="dateblock">
+        <span class="date">on {{ visual.pubdate }}</span>
+    </p>
+</div>
+<p class="description">
+    {{ visual.description }}
+</p>
+<div class="row">
+<div id="graphic" class="col-sm-6 col-sm-offset-3">
+</div>
+</div>
+{% endblock %}
+
+
+{% block extra_foot %}
+    {% if visual.is_dailygraphic == 'y' %}
+        <script type="text/javascript">
+            var pymParent = new pym.Parent('graphic', 'http://apps.stlpublicradio.org/dailygraphics/graphics/{{visual.slug}}/child.html', {});
+        </script>
+    {% endif %}
+{% endblock %}

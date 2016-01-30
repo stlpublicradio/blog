@@ -35,6 +35,26 @@ def index():
 
     return make_response(render_template('index.html', **context))
 
+@app.route('/visuals/<string:slug>/')
+def _visual(slug):
+
+    context = make_context()
+
+    context['visual'] = []
+    context['slug'] = ''
+
+    visuals = list(context['COPY']['graphics'])
+    visual_slug = ''
+
+    for index,visual in enumerate(visuals):
+        visual = dict(zip(visual.__dict__['_columns'], visual.__dict__['_row']))
+        visual_slug = visual.get('slug')
+
+        if visual_slug == slug:
+            context['visual'] = visual
+
+    return make_response(render_template('visual.html', **context))
+
 @app.route('/widget.html')
 def widget():
     """

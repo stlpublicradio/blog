@@ -1,47 +1,42 @@
 {% extends '_base.html' %}
 
-{% block header_content %}
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{ COPY.content.project_name|smarty }}</h1>
-                <h2>{{ COPY.content.lorem_ipsum|smarty }}</h2>
-            </div>
-        </div>
-    </div>
-</header>
-{% endblock %}
-
 
 {% block content %}
 <h1>{{ COPY.content.project_name }}</h1>
 
 <div id="story-meta">
-    <p class="byline">by <span>{{ COPY.content.byline }}</span></p>
     <p class="dateblock">
-        <span class="date">{{ COPY.content.pubdate }}</span>
-        <span class="time"> {{ COPY.content.pubtime }}</span>
+        <span class="time">Last updated at {{ COPY.content.pubtime }}</span>
+        <span class="date">on {{ COPY.content.pubdate }}</span>
+
     </p>
 </div>
-
-<h2>Example COPY list</h2>
-<dl>
-    {% for row in COPY.example_list %}
-    <dt>{{ row.term }}</dt><dd>{{ row.definition }}</dd>
-    {% endfor %}
-</dl>
-
-<h2 class="knockout-example">JST example</h2>
-<p id="template-example"></p>
-{% endblock %}
-
-
-{% block wide_content %}
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="knockout-example">{{ COPY.content.footer_title }}</h2>
-        <p>{{ COPY.content.lorem_ipsum }}</p>
+<div class="visuals-container row">
+    {% for row in COPY.graphics %}
+        {% if loop.index % 3 == 1 %}
+            <div class="row">
+        {% endif %}
+    <div class="col-sm-4">
+        <h3><a href="/visuals/{{row.slug}}">{{row.headline}}</a></h3>
+        {% if row.image %}<img class="img-responsive img-thumbnail" src="/assets/visuals/{{row.image}}"></img>
+        {% else %}<img class="img-responsive" src="http://placehold.it/550x{{ [250,300,350,400,450]|random }}"></img>
+        {% endif %}
+        <p>{{row.short_description}}</p>
+        <div class="row links">
+            <div class="col-xs-2 col-xs-offset-3">
+                <a title="See the code" href="{{row.repo}}"><i class="fa fa-github fa-2x"></i></a>
+            </div>
+            <div class="col-xs-2">
+                <a title="Read more" href="/visuals/{{row.slug}}"><i class="fa fa-link fa-2x"></i></a>
+            </div>
+            <div class="col-xs-2">
+                <a title="Read more" href="{{row.link}}"><i class="fa fa-external-link fa-2x"></i></a>
+            </div>
+        </div>
     </div>
+    {% if loop.index % 3 == 0 %}
+        </div>
+    {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}
