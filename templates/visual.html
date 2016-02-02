@@ -2,16 +2,22 @@
 
 
 {% block content %}
+<a class="btn btn-default" href="../../"><i class="fa fa-arrow-left"></i> Back</a>
+
 <h1>{{ visual.headline }}</h1>
 
 <div id="story-meta">
     <p class="dateblock">
-        <span class="date">on {{ visual.pubdate }}</span>
+        <span class="date">Published on {{ visual.pubdate }}</span>
     </p>
 </div>
 <p class="description">
     {{ visual.description }}
 </p>
+<ul class="list-unstyled links">
+    <li><a title="See the code" href="{{visual.repo}}"><i class="fa fa-github fa-2x"></i> See the code</a>
+    <li><a title="Read more" href="{{visual.link}}"><i class="fa fa-external-link fa-2x"></i> {{visual.story_headline}}</a>
+</ul>
 <div class="row">
 <div id="graphic" class="col-sm-6 col-sm-offset-3">
 </div>
