@@ -2,16 +2,18 @@
 
 
 {% block content %}
-<h1>{{ COPY.content.project_name }}</h1>
-
-<div id="story-meta">
-    <p class="dateblock">
-        <span class="time">Last updated at {{ COPY.content.pubtime }}</span>
-        <span class="date">on {{ COPY.content.pubdate }}</span>
-
-    </p>
-</div>
 <div class="visuals-container row">
+    <div class="row">
+        <h1>{{ COPY.content.project_name }}</h1>
+
+        <div id="story-meta">
+            <p class="dateblock">
+                <span class="time">Last updated at {{ COPY.content.pubtime }}</span>
+                <span class="date">on {{ COPY.content.pubdate }}</span>
+
+            </p>
+        </div>
+    </div>
     {% for row in COPY.graphics %}
         {% if loop.index % 3 == 1 %}
             <div class="row">
